@@ -1,3 +1,12 @@
 <resources>
+    <!-- Application name displayed in the app launcher and UI -->
     <string name="application_name">Memos</string>
+
+    <!-- Strings for the onboarding screen -->
+    <!-- Title displayed on the onboarding screen -->
+    <string name="screen_onboarding_title">Welcome to the Memos!</string>
+    <!-- Description text explaining the purpose and features of the app on the onboarding screen -->
+    <string name="screen_onboarding_description">A privacy-first, lightweight note-taking solution that allows you to effortlessly capture and share your ideas.</string>
+    <!-- Button text to proceed from the onboarding screen -->
+    <string name="screen_onboarding_button">Get started</string>
 </resources>

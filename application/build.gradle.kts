@@ -27,6 +27,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
+
     kotlinOptions {
         jvmTarget = "11"
     }
