@@ -2,7 +2,9 @@ package com.vsulimov.memos.factory.screen
 
 import androidx.fragment.app.Fragment
 import com.vsulimov.memos.factory.TypeIds.TYPE_ID_SCREEN_ONBOARDING
+import com.vsulimov.memos.factory.TypeIds.TYPE_ID_SCREEN_PRIVACY_POLICY
 import com.vsulimov.memos.fragment.screen.OnboardingScreenFragment
+import com.vsulimov.memos.fragment.screen.PrivacyPolicyScreenFragment
 import com.vsulimov.memos.state.ScreenState
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -31,6 +33,17 @@ class ScreenFragmentFactoryTest {
     }
 
     /**
+     * Tests that [ScreenFragmentFactory.createScreenFragment] returns an instance of
+     * [PrivacyPolicyScreenFragment] when provided with [ScreenState.PrivacyPolicy].
+     */
+    @Test
+    fun `createScreenFragment with PrivacyPolicy state returns PrivacyPolicyScreenFragment`() {
+        val factory = ScreenFragmentFactory()
+        val fragment = factory.createScreenFragment(ScreenState.PrivacyPolicy())
+        assertTrue(fragment is PrivacyPolicyScreenFragment)
+    }
+
+    /**
      * Tests that [ScreenFragmentFactory.getStateTypeIdForScreen] returns the correct
      * state type identifier, [TYPE_ID_SCREEN_ONBOARDING], for [OnboardingScreenFragment].
      */
@@ -40,6 +53,18 @@ class ScreenFragmentFactoryTest {
         val fragment: OnboardingScreenFragment = mock()
         val typeId = factory.getStateTypeIdForScreen(fragment)
         assertEquals(TYPE_ID_SCREEN_ONBOARDING, typeId)
+    }
+
+    /**
+     * Tests that [ScreenFragmentFactory.getStateTypeIdForScreen] returns the correct
+     * state type identifier, [TYPE_ID_SCREEN_PRIVACY_POLICY], for [PrivacyPolicyScreenFragment].
+     */
+    @Test
+    fun `getStateTypeIdForScreen with PrivacyPolicyScreenFragment returns TYPE_ID_SCREEN_PRIVACY_POLICY`() {
+        val factory = ScreenFragmentFactory()
+        val fragment: PrivacyPolicyScreenFragment = mock()
+        val typeId = factory.getStateTypeIdForScreen(fragment)
+        assertEquals(TYPE_ID_SCREEN_PRIVACY_POLICY, typeId)
     }
 
     /**

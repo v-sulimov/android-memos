@@ -1,5 +1,6 @@
 package com.vsulimov.memos.state
 
+import com.vsulimov.memos.factory.TypeIds
 import com.vsulimov.memos.factory.TypeIds.TYPE_ID_SCREEN_ONBOARDING
 import com.vsulimov.navigation.state.NavigationComponent
 
@@ -19,4 +20,11 @@ sealed class ScreenState : NavigationComponent {
      * This object is used to indicate that the onboarding screen should be displayed in the application.
      */
     data class Onboarding(override val typeId: String = TYPE_ID_SCREEN_ONBOARDING) : ScreenState()
+
+    /**
+     * Represents the privacy policy screen state.
+     *
+     * This object is used to indicate that the privacy policy screen should be displayed in the application.
+     */
+    data class PrivacyPolicy(override val typeId: String = TypeIds.TYPE_ID_SCREEN_PRIVACY_POLICY) : ScreenState()
 }

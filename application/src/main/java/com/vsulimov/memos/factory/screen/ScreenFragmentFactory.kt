@@ -2,7 +2,9 @@ package com.vsulimov.memos.factory.screen
 
 import androidx.fragment.app.Fragment
 import com.vsulimov.memos.factory.TypeIds.TYPE_ID_SCREEN_ONBOARDING
+import com.vsulimov.memos.factory.TypeIds.TYPE_ID_SCREEN_PRIVACY_POLICY
 import com.vsulimov.memos.fragment.screen.OnboardingScreenFragment
+import com.vsulimov.memos.fragment.screen.PrivacyPolicyScreenFragment
 import com.vsulimov.memos.state.ScreenState
 import com.vsulimov.navigation.factory.ScreenFragmentFactory
 
@@ -29,6 +31,7 @@ class ScreenFragmentFactory : ScreenFragmentFactory<ScreenState> {
      */
     override fun createScreenFragment(screen: ScreenState): Fragment = when (screen) {
         is ScreenState.Onboarding -> OnboardingScreenFragment()
+        is ScreenState.PrivacyPolicy -> PrivacyPolicyScreenFragment()
     }
 
     /**
@@ -45,6 +48,7 @@ class ScreenFragmentFactory : ScreenFragmentFactory<ScreenState> {
     override fun getStateTypeIdForScreen(fragment: Fragment): String {
         return when (fragment) {
             is OnboardingScreenFragment -> TYPE_ID_SCREEN_ONBOARDING
+            is PrivacyPolicyScreenFragment -> TYPE_ID_SCREEN_PRIVACY_POLICY
             else -> throw IllegalArgumentException("Unknown screen type: ${fragment::class.java.name}")
         }
     }
