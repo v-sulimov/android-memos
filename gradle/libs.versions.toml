@@ -8,6 +8,7 @@ navigation = "1.0.0"
 http-client = "1.0.0"
 kotlin-test = "2.1.20"
 mockito-kotlin = "5.4.0"
+json = "20250517"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -17,6 +18,7 @@ navigation = { module = "com.vsulimov:navigation", version.ref = "navigation" }
 http-client = { module = "com.vsulimov:httpclient", version.ref = "http-client" }
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin-test" }
 mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockito-kotlin" }
+json = { module = "org.json:json", version.ref = "json" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

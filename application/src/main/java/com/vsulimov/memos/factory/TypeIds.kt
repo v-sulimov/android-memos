@@ -15,4 +15,9 @@ object TypeIds {
      * The type identifier for the privacy policy screen.
      */
     const val TYPE_ID_SCREEN_PRIVACY_POLICY = "Privacy Policy"
+
+    /**
+     * The type identifier for the configure server screen.
+     */
+    const val TYPE_ID_SCREEN_CONFIGURE_SERVER = "Configure Server"
 }

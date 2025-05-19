@@ -43,3 +43,14 @@ fun ApplicationState.toOverlayState() = navigationState.overlay
  * @return The list of screens in the navigation back stack.
  */
 fun ApplicationState.toNavigationBackStack() = navigationState.backStack
+
+/**
+ * Converts the [ApplicationState] to its current configure server screen state.
+ *
+ * This function extracts the current screen state from the [ApplicationState]'s navigation state and casts it
+ * to [ScreenState.ConfigureServer]. It is used to retrieve the server configuration screen state, which includes
+ * the server URL.
+ *
+ * @return The [ScreenState.ConfigureServer] representing the current server configuration screen state.
+ */
+fun ApplicationState.toConfigureServerScreenState() = toScreenState() as ScreenState.ConfigureServer

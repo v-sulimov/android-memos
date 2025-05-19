@@ -19,4 +19,16 @@
     <string name="screen_privacy_policy_agree_button">Agree</string>
     <!-- Text for the button on the privacy policy screen to decline the policy and navigate back -->
     <string name="screen_privacy_policy_disagree_button">Disagree</string>
+
+    <!-- Strings for the configure server screen -->
+    <!-- Title displayed at the top of the configure server screen -->
+    <string name="screen_configure_server_title">Connect to Your Memos Server</string>
+    <!-- Description text explaining the purpose of the configure server screen and instructions for entering the server URL -->
+    <string name="screen_configure_server_description">To use this application with your self-hosted Memos instance, please enter the full URL of your server below.\n\nEnsure the URL is correct and points to an accessible Memos instance.\n\nIf you\'re unsure, check your server configuration or contact your administrator for the correct address.</string>
+    <!-- Placeholder text displayed in the server URL input field -->
+    <string name="screen_configure_server_url_hint">Enter server URL</string>
+    <!-- Text for the button that cancels the server configuration and navigates back -->
+    <string name="screen_configure_server_cancel_button">Cancel</string>
+    <!-- Text for the button that proceeds to the next step after entering the server URL -->
+    <string name="screen_configure_server_next_button">Next</string>
 </resources>

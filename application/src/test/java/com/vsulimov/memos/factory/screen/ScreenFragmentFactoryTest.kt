@@ -1,8 +1,10 @@
 package com.vsulimov.memos.factory.screen
 
 import androidx.fragment.app.Fragment
+import com.vsulimov.memos.factory.TypeIds.TYPE_ID_SCREEN_CONFIGURE_SERVER
 import com.vsulimov.memos.factory.TypeIds.TYPE_ID_SCREEN_ONBOARDING
 import com.vsulimov.memos.factory.TypeIds.TYPE_ID_SCREEN_PRIVACY_POLICY
+import com.vsulimov.memos.fragment.screen.ConfigureServerScreenFragment
 import com.vsulimov.memos.fragment.screen.OnboardingScreenFragment
 import com.vsulimov.memos.fragment.screen.PrivacyPolicyScreenFragment
 import com.vsulimov.memos.state.ScreenState
@@ -44,6 +46,17 @@ class ScreenFragmentFactoryTest {
     }
 
     /**
+     * Tests that [ScreenFragmentFactory.createScreenFragment] returns an instance of
+     * [ConfigureServerScreenFragment] when provided with [ScreenState.ConfigureServer].
+     */
+    @Test
+    fun `createScreenFragment with ConfigureServer state returns ConfigureServerScreenFragment`() {
+        val factory = ScreenFragmentFactory()
+        val fragment = factory.createScreenFragment(ScreenState.ConfigureServer())
+        assertTrue(fragment is ConfigureServerScreenFragment)
+    }
+
+    /**
      * Tests that [ScreenFragmentFactory.getStateTypeIdForScreen] returns the correct
      * state type identifier, [TYPE_ID_SCREEN_ONBOARDING], for [OnboardingScreenFragment].
      */
@@ -65,6 +78,18 @@ class ScreenFragmentFactoryTest {
         val fragment: PrivacyPolicyScreenFragment = mock()
         val typeId = factory.getStateTypeIdForScreen(fragment)
         assertEquals(TYPE_ID_SCREEN_PRIVACY_POLICY, typeId)
+    }
+
+    /**
+     * Tests that [ScreenFragmentFactory.getStateTypeIdForScreen] returns the correct
+     * state type identifier, [TYPE_ID_SCREEN_CONFIGURE_SERVER], for [ConfigureServerScreenFragment].
+     */
+    @Test
+    fun `getStateTypeIdForScreen with ConfigureServerScreenFragment returns TYPE_ID_SCREEN_CONFIGURE_SERVER`() {
+        val factory = ScreenFragmentFactory()
+        val fragment: ConfigureServerScreenFragment = mock()
+        val typeId = factory.getStateTypeIdForScreen(fragment)
+        assertEquals(TYPE_ID_SCREEN_CONFIGURE_SERVER, typeId)
     }
 
     /**

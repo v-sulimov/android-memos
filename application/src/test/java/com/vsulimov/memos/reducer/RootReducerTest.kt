@@ -1,6 +1,7 @@
 package com.vsulimov.memos.reducer
 
 import com.vsulimov.memos.action.ActivityLifecycleAction
+import com.vsulimov.memos.action.ConfigureServerAction
 import com.vsulimov.memos.factory.state.ApplicationStateFactory
 import com.vsulimov.memos.state.ApplicationState
 import com.vsulimov.memos.state.OverlayState
@@ -93,5 +94,34 @@ class RootReducerTest {
         val newState = rootReducer.reduce(action, initialState)
 
         assertSame(initialState, newState)
+    }
+
+    /**
+     * Tests that the [RootReducer] correctly handles a [ConfigureServerAction.ServerUrlChanged] by delegating
+     * to the [ConfigureServerReducer] and updating the [ApplicationState]'s [NavigationState] with the new
+     * [ScreenState.ConfigureServer] containing the updated server URL.
+     */
+    @Test
+    fun `reduce handles ConfigureServerAction ServerUrlChanged by updating server URL in navigation state`() {
+        val initialServerUrl = "https://old-url.com"
+        val newServerUrl = "https://new-url.com"
+        val initialState = ApplicationState(
+            navigationState = NavigationState(
+                screen = ScreenState.ConfigureServer(serverUrl = initialServerUrl),
+                backStack = CopyOnWriteStack<ScreenState>(),
+                overlay = null
+            )
+        )
+        val action = ConfigureServerAction.ServerUrlChanged(newServerUrl)
+
+        val newState = rootReducer.reduce(action, initialState)
+
+        val expectedNavigationState = NavigationState<ScreenState, OverlayState>(
+            screen = ScreenState.ConfigureServer(serverUrl = newServerUrl),
+            backStack = CopyOnWriteStack<ScreenState>(),
+            overlay = null
+        )
+        assertEquals(expectedNavigationState, newState.navigationState)
+        assertEquals(initialState.copy(navigationState = expectedNavigationState), newState)
     }
 }

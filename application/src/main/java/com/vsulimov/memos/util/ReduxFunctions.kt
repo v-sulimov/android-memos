@@ -56,9 +56,29 @@ fun addMiddleware(middleware: Middleware<ApplicationState>) =
     MemosApplication.getInstance().getStore().addMiddleware(middleware)
 
 /**
+ * Adds a list of middlewares to the application-wide store.
+ * This function iterates through the provided list and adds each middleware individually using [addMiddleware].
+ *
+ * @param middlewares The list of [Middleware] instances to add to the store.
+ */
+fun addMiddlewares(middlewares: List<Middleware<ApplicationState>>) {
+    middlewares.forEach { middleware -> addMiddleware(middleware) }
+}
+
+/**
  * Removes a middleware from the application-wide store.
  *
  * @param middleware The [Middleware] to remove from the store.
  */
 fun removeMiddleware(middleware: Middleware<ApplicationState>) =
     MemosApplication.getInstance().getStore().removeMiddleware(middleware)
+
+/**
+ * Removes a list of middlewares from the application-wide store.
+ * This function iterates through the provided list and removes each middleware individually using [removeMiddleware].
+ *
+ * @param middlewares The list of [Middleware] instances to remove from the store.
+ */
+fun removeMiddlewares(middlewares: List<Middleware<ApplicationState>>) {
+    middlewares.forEach { middleware -> removeMiddleware(middleware) }
+}
