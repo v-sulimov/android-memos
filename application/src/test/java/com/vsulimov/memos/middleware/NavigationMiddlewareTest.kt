@@ -23,7 +23,6 @@ import kotlin.test.assertTrue
  * @see ApplicationState
  */
 class NavigationMiddlewareTest {
-
     private var finishActivityCalled: Boolean = false
     private lateinit var nextAction: MutableList<Action>
     private lateinit var dispatchAction: MutableList<Action>
@@ -58,7 +57,7 @@ class NavigationMiddlewareTest {
             action = action,
             state = state,
             next = { nextAction.add(it) },
-            dispatch = { dispatchAction.add(it) }
+            dispatch = { dispatchAction.add(it) },
         )
 
         assertTrue(finishActivityCalled, "finishActivityFunction should be called")
@@ -81,7 +80,7 @@ class NavigationMiddlewareTest {
             action = action,
             state = state,
             next = { nextAction.add(it) },
-            dispatch = { dispatchAction.add(it) }
+            dispatch = { dispatchAction.add(it) },
         )
 
         assertFalse(finishActivityCalled, "finishActivityFunction should not be called")
@@ -97,16 +96,17 @@ class NavigationMiddlewareTest {
      */
     @Test
     fun `should not call finishActivityFunction when backStack is not empty`() {
-        val state = ApplicationStateTestFactory.createApplicationState(
-            backStack = CopyOnWriteStack(listOf(ScreenState.Onboarding()))
-        )
+        val state =
+            ApplicationStateTestFactory.createApplicationState(
+                backStack = CopyOnWriteStack(listOf(ScreenState.Onboarding())),
+            )
         val action = GoBack
 
         middleware.invokeTyped(
             action = action,
             state = state,
             next = { nextAction.add(it) },
-            dispatch = { dispatchAction.add(it) }
+            dispatch = { dispatchAction.add(it) },
         )
 
         assertFalse(finishActivityCalled, "finishActivityFunction should not be called")

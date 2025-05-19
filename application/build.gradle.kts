@@ -39,10 +39,12 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.material)
     implementation(libs.navigation)
     implementation(libs.http.client)
 
     testImplementation(libs.kotlin.test)
     testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.json)
 }

@@ -16,7 +16,6 @@ import com.vsulimov.navigation.factory.OverlayFragmentFactory
  * @see DialogFragment
  */
 class OverlayFragmentFactory : OverlayFragmentFactory<OverlayState> {
-
     /**
      * Creates a [DialogFragment] for the specified [OverlayState].
      *
@@ -41,9 +40,8 @@ class OverlayFragmentFactory : OverlayFragmentFactory<OverlayState> {
      * @return A [String] representing the state type ID for the given fragment.
      * @throws IllegalArgumentException If the dialog fragment type is unknown or unsupported.
      */
-    override fun getStateTypeIdForOverlay(dialogFragment: DialogFragment): String {
-        return when (dialogFragment) {
+    override fun getStateTypeIdForOverlay(dialogFragment: DialogFragment): String =
+        when (dialogFragment) {
             else -> throw IllegalArgumentException("Unknown overlay type ${dialogFragment::class.simpleName}")
         }
-    }
 }

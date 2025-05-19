@@ -12,5 +12,5 @@ import com.vsulimov.navigation.state.NavigationState
  * @see OverlayState
  */
 data class ApplicationState(
-    val navigationState: NavigationState<ScreenState, OverlayState>
+    val navigationState: NavigationState<ScreenState, OverlayState>,
 )

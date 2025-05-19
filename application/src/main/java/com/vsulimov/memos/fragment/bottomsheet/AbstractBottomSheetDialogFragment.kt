@@ -15,9 +15,8 @@ import com.vsulimov.navigation.action.NavigationAction.DismissOverlay
  * @constructor Creates an instance with the specified layout resource ID.
  */
 abstract class AbstractBottomSheetDialogFragment(
-    @LayoutRes contentLayoutId: Int
+    @LayoutRes contentLayoutId: Int,
 ) : BottomSheetDialogFragment(contentLayoutId) {
-
     /**
      * Flag indicating whether to dispatch the [DismissOverlay] action on dialog dismissal.
      * Defaults to `true`.

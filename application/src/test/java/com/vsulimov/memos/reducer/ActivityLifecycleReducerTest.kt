@@ -16,7 +16,6 @@ import kotlin.test.assertSame
  * [ActivityLifecycleAction.OnDestroy] actions and updates the [ApplicationState] accordingly.
  */
 class ActivityLifecycleReducerTest {
-
     /**
      * Tests that the [ActivityLifecycleReducer] resets the [ApplicationState] to its initial state
      * when handling an [ActivityLifecycleAction.OnDestroy] with [isFinishing] set to true.
@@ -25,11 +24,12 @@ class ActivityLifecycleReducerTest {
     fun `reduceTyped resets state to initial when OnDestroy with isFinishing true`() {
         val initialState = ApplicationStateFactory.createInitialApplicationState()
         val customBackStack = CopyOnWriteStack<ScreenState>(listOf(ScreenState.Onboarding()))
-        val customNavigationState = NavigationState<ScreenState, OverlayState>(
-            screen = ScreenState.PrivacyPolicy(),
-            backStack = customBackStack,
-            overlay = OverlayState.Dialog.EmptyDialog()
-        )
+        val customNavigationState =
+            NavigationState<ScreenState, OverlayState>(
+                screen = ScreenState.PrivacyPolicy(),
+                backStack = customBackStack,
+                overlay = OverlayState.Dialog.EmptyDialog(),
+            )
         val customState = ApplicationState(navigationState = customNavigationState)
         val action = ActivityLifecycleAction.OnDestroy(isFinishing = true)
 
@@ -45,11 +45,12 @@ class ActivityLifecycleReducerTest {
     @Test
     fun `reduceTyped returns same state when OnDestroy with isFinishing false`() {
         val customBackStack = CopyOnWriteStack<ScreenState>(listOf(ScreenState.Onboarding()))
-        val customNavigationState = NavigationState<ScreenState, OverlayState>(
-            screen = ScreenState.PrivacyPolicy(),
-            backStack = customBackStack,
-            overlay = OverlayState.Dialog.EmptyDialog()
-        )
+        val customNavigationState =
+            NavigationState<ScreenState, OverlayState>(
+                screen = ScreenState.PrivacyPolicy(),
+                backStack = customBackStack,
+                overlay = OverlayState.Dialog.EmptyDialog(),
+            )
         val customState = ApplicationState(navigationState = customNavigationState)
         val action = ActivityLifecycleAction.OnDestroy(isFinishing = false)
 

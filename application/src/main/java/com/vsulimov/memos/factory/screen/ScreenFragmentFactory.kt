@@ -1,8 +1,10 @@
 package com.vsulimov.memos.factory.screen
 
 import androidx.fragment.app.Fragment
+import com.vsulimov.memos.factory.TypeIds.TYPE_ID_SCREEN_CONFIGURE_SERVER
 import com.vsulimov.memos.factory.TypeIds.TYPE_ID_SCREEN_ONBOARDING
 import com.vsulimov.memos.factory.TypeIds.TYPE_ID_SCREEN_PRIVACY_POLICY
+import com.vsulimov.memos.fragment.screen.ConfigureServerScreenFragment
 import com.vsulimov.memos.fragment.screen.OnboardingScreenFragment
 import com.vsulimov.memos.fragment.screen.PrivacyPolicyScreenFragment
 import com.vsulimov.memos.state.ScreenState
@@ -20,7 +22,6 @@ import com.vsulimov.navigation.factory.ScreenFragmentFactory
  * @see Fragment
  */
 class ScreenFragmentFactory : ScreenFragmentFactory<ScreenState> {
-
     /**
      * Creates a [Fragment] for the specified [ScreenState].
      *
@@ -29,10 +30,12 @@ class ScreenFragmentFactory : ScreenFragmentFactory<ScreenState> {
      * @param screen The [ScreenState] defining the screen to be created.
      * @return A [Fragment] corresponding to the specified screen state.
      */
-    override fun createScreenFragment(screen: ScreenState): Fragment = when (screen) {
-        is ScreenState.Onboarding -> OnboardingScreenFragment()
-        is ScreenState.PrivacyPolicy -> PrivacyPolicyScreenFragment()
-    }
+    override fun createScreenFragment(screen: ScreenState): Fragment =
+        when (screen) {
+            is ScreenState.Onboarding -> OnboardingScreenFragment()
+            is ScreenState.PrivacyPolicy -> PrivacyPolicyScreenFragment()
+            is ScreenState.ConfigureServer -> ConfigureServerScreenFragment()
+        }
 
     /**
      * Retrieves the state type identifier for a given [Fragment].
@@ -45,11 +48,11 @@ class ScreenFragmentFactory : ScreenFragmentFactory<ScreenState> {
      * @return A [String] representing the state type identifier for the fragment.
      * @throws IllegalArgumentException If the provided fragment does not correspond to a known [ScreenState].
      */
-    override fun getStateTypeIdForScreen(fragment: Fragment): String {
-        return when (fragment) {
+    override fun getStateTypeIdForScreen(fragment: Fragment): String =
+        when (fragment) {
             is OnboardingScreenFragment -> TYPE_ID_SCREEN_ONBOARDING
             is PrivacyPolicyScreenFragment -> TYPE_ID_SCREEN_PRIVACY_POLICY
+            is ConfigureServerScreenFragment -> TYPE_ID_SCREEN_CONFIGURE_SERVER
             else -> throw IllegalArgumentException("Unknown screen type: ${fragment::class.java.name}")
         }
-    }
 }

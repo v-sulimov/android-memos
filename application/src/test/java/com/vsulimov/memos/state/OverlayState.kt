@@ -12,18 +12,18 @@ import com.vsulimov.navigation.state.NavigationComponent
  * @see BottomSheet
  */
 sealed class OverlayState : NavigationComponent {
-
     /**
      * Represents a dialog overlay state.
      *
      * This object is used to indicate that a dialog should be displayed as an overlay in the application.
      */
-    sealed class Dialog() : OverlayState() {
-
+    sealed class Dialog : OverlayState() {
         /**
          * Represents an empty dialog state. For testing purposes only.
          */
-        data class EmptyDialog(override val typeId: String = "Empty Dialog") : Dialog()
+        data class EmptyDialog(
+            override val typeId: String = "Empty Dialog",
+        ) : Dialog()
     }
 
     /**

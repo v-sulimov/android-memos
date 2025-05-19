@@ -1,22 +1,36 @@
 <resources>
-    <!-- Application name displayed in the app launcher and UI -->
+    <!-- Application name displayed in the app launcher and various UI components -->
     <string name="application_name">Memos</string>
 
     <!-- Strings for the onboarding screen -->
-    <!-- Title displayed on the onboarding screen -->
+    <!-- Title displayed at the top of the onboarding screen to welcome users -->
     <string name="screen_onboarding_title">Welcome to the Memos!</string>
-    <!-- Description text explaining the purpose and features of the app on the onboarding screen -->
+    <!-- Description text on the onboarding screen, introducing the app’s purpose and key features -->
     <string name="screen_onboarding_description">A privacy-first, lightweight note-taking solution that allows you to effortlessly capture and share your ideas.</string>
-    <!-- Text for the button on the onboarding screen that navigates to the next step (e.g., privacy policy screen) -->
+    <!-- Text for the button on the onboarding screen that navigates to the next step, typically the privacy policy screen -->
     <string name="screen_onboarding_button">Get started</string>
 
     <!-- Strings for the privacy policy screen -->
     <!-- Title displayed at the top of the privacy policy screen -->
     <string name="screen_privacy_policy_title">Privacy Policy</string>
-    <!-- Detailed description of the app’s privacy policy, explaining data handling, open-source transparency, and support contact information -->
+    <!-- Detailed description of the app’s privacy policy, outlining data handling, open-source transparency, and support contact instructions -->
     <string name="screen_privacy_policy_description">This application is designed with your privacy in mind: It never collects or shares any personal information, doesn’t track your usage, and avoids gathering any analytics.\nIt simply focuses on delivering the features it promises.\n\nOn top of that, the application is fully open-sourced, meaning its code is publicly available for anyone to inspect, ensuring transparency and building trust.\n\nIf you run into any problems while using it, I’m kindly ask that you contact me directly instead of rating the application with a bad review.\nYour input is invaluable. It helps me make the application better.\n\nThank you for choosing Memos!</string>
-    <!-- Text for the button on the privacy policy screen to accept the policy and proceed -->
+    <!-- Text for the button on the privacy policy screen to accept the policy and proceed to the next screen -->
     <string name="screen_privacy_policy_agree_button">Agree</string>
     <!-- Text for the button on the privacy policy screen to decline the policy and navigate back -->
     <string name="screen_privacy_policy_disagree_button">Disagree</string>
+
+    <!-- Strings for the configure server screen -->
+    <!-- Title displayed at the top of the configure server screen to prompt server connection -->
+    <string name="screen_configure_server_title">Connect to Your Memos Server</string>
+    <!-- Description text on the configure server screen, explaining the need to enter a valid server URL and providing guidance -->
+    <string name="screen_configure_server_description">To use this application with your self-hosted Memos instance, please enter the full URL of your server below.\n\nEnsure the URL is correct and points to an accessible Memos instance.\n\nIf you\'re unsure, check your server configuration or contact your administrator for the correct address.</string>
+    <!-- Placeholder text displayed in the server URL input field to guide the user -->
+    <string name="screen_configure_server_url_hint">Enter server URL</string>
+    <!-- Text for the button that cancels the server configuration process and navigates back -->
+    <string name="screen_configure_server_cancel_button">Cancel</string>
+    <!-- Text for the button that proceeds to the next step after the user enters a server URL -->
+    <string name="screen_configure_server_next_button">Next</string>
+    <!-- Error message displayed when the entered server URL is invalid, prompting the user to correct it -->
+    <string name="screen_configure_server_url_invalid">Invalid Server URL. Please ensure the URL is correct and try again.</string>
 </resources>
