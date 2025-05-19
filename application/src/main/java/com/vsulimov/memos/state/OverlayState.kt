@@ -12,13 +12,12 @@ import com.vsulimov.navigation.state.NavigationComponent
  * @see BottomSheet
  */
 sealed class OverlayState : NavigationComponent {
-
     /**
      * Represents a dialog overlay state.
      *
      * This object is used to indicate that a dialog should be displayed as an overlay in the application.
      */
-    sealed class Dialog() : OverlayState()
+    sealed class Dialog : OverlayState()
 
     /**
      * Represents the state of a bottom sheet overlay in the application.

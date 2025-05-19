@@ -11,7 +11,6 @@ import com.vsulimov.redux.TypedReducer
  */
 object ActivityLifecycleReducer :
     TypedReducer<ActivityLifecycleAction, ApplicationState>(ActivityLifecycleAction::class.java) {
-
     /**
      * Reduces the given [action] and current [state] to produce a new [ApplicationState].
      *
@@ -21,14 +20,15 @@ object ActivityLifecycleReducer :
      */
     override fun reduceTyped(
         action: ActivityLifecycleAction,
-        state: ApplicationState
-    ): ApplicationState = when (action) {
-        is ActivityLifecycleAction.OnDestroy -> {
-            if (action.isFinishing) {
-                ApplicationStateFactory.createInitialApplicationState()
-            } else {
-                state
+        state: ApplicationState,
+    ): ApplicationState =
+        when (action) {
+            is ActivityLifecycleAction.OnDestroy -> {
+                if (action.isFinishing) {
+                    ApplicationStateFactory.createInitialApplicationState()
+                } else {
+                    state
+                }
             }
         }
-    }
 }

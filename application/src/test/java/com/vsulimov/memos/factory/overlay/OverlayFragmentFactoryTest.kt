@@ -13,7 +13,6 @@ import kotlin.test.assertFailsWith
  * state type identifiers for dialog fragments.
  */
 class OverlayFragmentFactoryTest {
-
     /**
      * Tests that [OverlayFragmentFactory.getStateTypeIdForOverlay] throws an
      * [IllegalArgumentException] when provided with an unknown overlay type.

@@ -1,6 +1,7 @@
 package com.vsulimov.memos.reducer
 
 import com.vsulimov.memos.action.ActivityLifecycleAction
+import com.vsulimov.memos.action.ConfigureServerAction
 import com.vsulimov.memos.factory.state.ApplicationStateFactory
 import com.vsulimov.memos.state.ApplicationState
 import com.vsulimov.memos.state.OverlayState
@@ -19,7 +20,6 @@ import kotlin.test.assertSame
  * and updates the [ApplicationState] as expected.
  */
 class RootReducerTest {
-
     private val rootReducer = RootReducer()
 
     /**
@@ -29,25 +29,28 @@ class RootReducerTest {
      */
     @Test
     fun `reduce handles NavigationAction PushScreen by updating navigation state`() {
-        val initialState = ApplicationState(
-            navigationState = NavigationState(
-                screen = ScreenState.Onboarding(),
-                backStack = CopyOnWriteStack<ScreenState>(),
-                overlay = null
+        val initialState =
+            ApplicationState(
+                navigationState =
+                    NavigationState(
+                        screen = ScreenState.Onboarding(),
+                        backStack = CopyOnWriteStack<ScreenState>(),
+                        overlay = null,
+                    ),
             )
-        )
 
         val action = NavigationAction.NavigateTo(ScreenState.PrivacyPolicy())
 
         val newState = rootReducer.reduce(action, initialState)
 
         val expectedBackStack = CopyOnWriteStack<ScreenState>(listOf(ScreenState.Onboarding()))
-        val expectedNavigationState = NavigationState<ScreenState, OverlayState>(
-            screen = ScreenState.PrivacyPolicy(),
-            backStack = expectedBackStack,
-            overlay = null,
-            transitionType = TransitionType.FORWARD
-        )
+        val expectedNavigationState =
+            NavigationState<ScreenState, OverlayState>(
+                screen = ScreenState.PrivacyPolicy(),
+                backStack = expectedBackStack,
+                overlay = null,
+                transitionType = TransitionType.FORWARD,
+            )
         assertEquals(expectedNavigationState, newState.navigationState)
         assertEquals(initialState.copy(navigationState = expectedNavigationState), newState)
     }
@@ -59,13 +62,15 @@ class RootReducerTest {
      */
     @Test
     fun `reduce handles ActivityLifecycleAction OnDestroy with isFinishing true by resetting state`() {
-        val initialState = ApplicationState(
-            navigationState = NavigationState(
-                screen = ScreenState.PrivacyPolicy(),
-                backStack = CopyOnWriteStack<ScreenState>().apply { push(ScreenState.Onboarding()) },
-                overlay = null
+        val initialState =
+            ApplicationState(
+                navigationState =
+                    NavigationState(
+                        screen = ScreenState.PrivacyPolicy(),
+                        backStack = CopyOnWriteStack<ScreenState>().apply { push(ScreenState.Onboarding()) },
+                        overlay = null,
+                    ),
             )
-        )
         val action = ActivityLifecycleAction.OnDestroy(isFinishing = true)
 
         val newState = rootReducer.reduce(action, initialState)
@@ -80,18 +85,52 @@ class RootReducerTest {
      */
     @Test
     fun `reduce returns unchanged state for unhandled actions`() {
-        val initialState = ApplicationState(
-            navigationState = NavigationState(
-                screen = ScreenState.Onboarding(),
-                backStack = CopyOnWriteStack(),
-                overlay = null
+        val initialState =
+            ApplicationState(
+                navigationState =
+                    NavigationState(
+                        screen = ScreenState.Onboarding(),
+                        backStack = CopyOnWriteStack(),
+                        overlay = null,
+                    ),
             )
-        )
 
         val action = object : Action {}
 
         val newState = rootReducer.reduce(action, initialState)
 
         assertSame(initialState, newState)
+    }
+
+    /**
+     * Tests that the [RootReducer] correctly handles a [ConfigureServerAction.ServerUrlChanged] by delegating
+     * to the [ConfigureServerReducer] and updating the [ApplicationState]'s [NavigationState] with the new
+     * [ScreenState.ConfigureServer] containing the updated server URL.
+     */
+    @Test
+    fun `reduce handles ConfigureServerAction ServerUrlChanged by updating server URL in navigation state`() {
+        val initialServerUrl = "https://old-url.com"
+        val newServerUrl = "https://new-url.com"
+        val initialState =
+            ApplicationState(
+                navigationState =
+                    NavigationState(
+                        screen = ScreenState.ConfigureServer(serverUrl = initialServerUrl),
+                        backStack = CopyOnWriteStack<ScreenState>(),
+                        overlay = null,
+                    ),
+            )
+        val action = ConfigureServerAction.ServerUrlChanged(newServerUrl)
+
+        val newState = rootReducer.reduce(action, initialState)
+
+        val expectedNavigationState =
+            NavigationState<ScreenState, OverlayState>(
+                screen = ScreenState.ConfigureServer(serverUrl = newServerUrl),
+                backStack = CopyOnWriteStack<ScreenState>(),
+                overlay = null,
+            )
+        assertEquals(expectedNavigationState, newState.navigationState)
+        assertEquals(initialState.copy(navigationState = expectedNavigationState), newState)
     }
 }

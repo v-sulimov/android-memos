@@ -10,8 +10,7 @@ import com.vsulimov.navigation.action.NavigationAction.DismissOverlay
  * Abstract base class for DialogFragments providing shared functionality.
  * Extends [DialogFragment].
  */
-abstract class AbstractDialogFragment() : DialogFragment() {
-
+abstract class AbstractDialogFragment : DialogFragment() {
     /**
      * Flag indicating whether to dispatch the [DismissOverlay] action on dialog dismissal.
      * Defaults to `true`.

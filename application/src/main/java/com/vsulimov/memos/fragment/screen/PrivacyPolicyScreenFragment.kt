@@ -4,23 +4,30 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import com.vsulimov.memos.R
+import com.vsulimov.memos.action.PrivacyPolicyAction.PrivacyPolicyAccepted
+import com.vsulimov.memos.factory.TypeIds
+import com.vsulimov.memos.factory.middleware.PrivacyPolicyMiddlewareFactory
+import com.vsulimov.memos.state.ApplicationState
 import com.vsulimov.memos.util.dispatch
 import com.vsulimov.navigation.action.NavigationAction.GoBack
+import com.vsulimov.redux.Middleware
 
 /**
- * A fragment displaying the privacy policy screen, allowing users to agree or disagree with the policy.
+ * A fragment that displays the privacy policy screen, allowing users to agree or disagree with the policy.
  *
  * This fragment extends [AbstractScreenFragment] to present the privacy policy UI, including a root layout
- * and buttons for agreeing or disagreeing with the policy. It handles navigation and user interactions
- * through click listeners.
+ * and buttons for agreeing or disagreeing with the policy. It implements [ScreenMiddlewaresProvider] to
+ * provide screen-specific middlewares for state management and handles user interactions through click listeners.
  *
  * @see AbstractScreenFragment
+ * @see ScreenMiddlewaresProvider
  * @constructor Creates an instance of [PrivacyPolicyScreenFragment] with the layout resource ID [R.layout.screen_privacy_policy].
  */
-class PrivacyPolicyScreenFragment : AbstractScreenFragment(R.layout.screen_privacy_policy) {
-
+class PrivacyPolicyScreenFragment :
+    AbstractScreenFragment(R.layout.screen_privacy_policy),
+    ScreenMiddlewaresProvider {
     /**
-     * The root LinearLayout of the privacy policy screen layout.
+     * The root [LinearLayout] of the privacy policy screen layout.
      */
     private lateinit var rootLayout: LinearLayout
 
@@ -30,13 +37,13 @@ class PrivacyPolicyScreenFragment : AbstractScreenFragment(R.layout.screen_priva
     private lateinit var disagreeButton: Button
 
     /**
-     * Button for users to agree with the privacy policy. The action is not yet implemented.
+     * Button for users to agree with the privacy policy, triggering navigation to the server configuration screen.
      */
     private lateinit var agreeButton: Button
 
     /**
      * Initializes the views for the privacy policy screen by locating them in the layout.
-     * This method is called during [onViewCreated] to set up [rootLayout], [disagreeButton], and [agreeButton].
+     * Sets up [rootLayout], [disagreeButton], and [agreeButton] using their respective IDs from the layout.
      *
      * @param view The root view of the fragment's layout.
      */
@@ -48,18 +55,35 @@ class PrivacyPolicyScreenFragment : AbstractScreenFragment(R.layout.screen_priva
 
     /**
      * Sets click listeners for the [disagreeButton] and [agreeButton].
-     * The [disagreeButton] navigates back, while the [agreeButton] action is currently unimplemented.
+     * The [disagreeButton] dispatches a [GoBack] action to navigate back, while the [agreeButton]
+     * dispatches a [PrivacyPolicyAccepted] action to navigate to the server configuration screen.
      */
     override fun setOnClickListeners() {
         disagreeButton.setOnClickListener { dispatch(GoBack) }
-        agreeButton.setOnClickListener { TODO("Not implemented yet.") }
+        agreeButton.setOnClickListener { dispatch(PrivacyPolicyAccepted) }
     }
 
     /**
      * Applies window insets to the privacy policy screen's [rootLayout].
-     * This method uses [applyDefaultInsets] to adjust padding for system bars and display cutouts.
+     * Uses [applyDefaultInsets] to adjust padding for system bars and display cutouts.
      */
     override fun applyWindowInsets() {
         applyDefaultInsets(rootLayout)
     }
+
+    /**
+     * Provides a unique identifier for the privacy policy screen.
+     *
+     * @return A string representing the screen's unique tag, defined as [TypeIds.TYPE_ID_SCREEN_PRIVACY_POLICY].
+     */
+    override fun provideTag(): String = TypeIds.TYPE_ID_SCREEN_PRIVACY_POLICY
+
+    /**
+     * Provides the list of middlewares for the privacy policy screen.
+     *
+     * @return A list containing a single middleware created by [PrivacyPolicyMiddlewareFactory.createPrivacyPolicyMiddleware]
+     *         using the fragment's context.
+     */
+    override fun provideScreenMiddlewares(): List<Middleware<ApplicationState>> =
+        listOf(PrivacyPolicyMiddlewareFactory.createPrivacyPolicyMiddleware(requireContext()))
 }

@@ -21,9 +21,8 @@ import com.vsulimov.redux.TypedMiddleware
  * @see TypedMiddleware
  */
 class NavigationMiddleware(
-    private val finishActivityFunction: () -> Unit
+    private val finishActivityFunction: () -> Unit,
 ) : TypedMiddleware<NavigationAction.GoBack, ApplicationState>(NavigationAction.GoBack::class.java) {
-
     /**
      * Processes a [NavigationAction.GoBack] action and decides the appropriate navigation behavior.
      *
@@ -41,7 +40,7 @@ class NavigationMiddleware(
         action: NavigationAction.GoBack,
         state: ApplicationState,
         next: (Action) -> Unit,
-        dispatch: (Action) -> Unit
+        dispatch: (Action) -> Unit,
     ) {
         if (state.toOverlayState() == null && state.toNavigationBackStack().isEmpty()) {
             Log.d(TAG, "Received GoBack action. Overlay is null and backStack is empty. Resolution: Finish activity.")
@@ -53,7 +52,6 @@ class NavigationMiddleware(
     }
 
     companion object {
-
         /**
          * Tag used for logging navigation-related events.
          */

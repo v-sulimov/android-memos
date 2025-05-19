@@ -5,4 +5,10 @@
 
     <!-- Default padding size, referencing the default margin for consistency -->
     <dimen name="default_padding">@dimen/default_margin</dimen>
+
+    <!-- Size of the circular progress indicator used in the server configuration screen -->
+    <dimen name="configure_server_indicator_size">24dp</dimen>
+
+    <!-- Thickness of the track for the circular progress indicator in the server configuration screen -->
+    <dimen name="configure_server_track_thickness">2dp</dimen>
 </resources>

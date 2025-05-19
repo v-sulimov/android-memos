@@ -12,7 +12,6 @@ import kotlin.test.assertTrue
  * the initial [ApplicationState] with the expected [NavigationState].
  */
 class ApplicationStateFactoryTest {
-
     /**
      * Tests that [ApplicationStateFactory.createInitialApplicationState] returns an [ApplicationState]
      * with a [NavigationState] that has the onboarding screen, an empty back stack, and no overlay.

@@ -11,7 +11,6 @@ import com.vsulimov.stack.CopyOnWriteStack
  * Provides a convenient way to construct [com.vsulimov.memos.state.ApplicationState] with customizable navigation state.
  */
 object ApplicationStateTestFactory {
-
     /**
      * Creates an [com.vsulimov.memos.state.ApplicationState] with the specified navigation state.
      *
@@ -23,12 +22,13 @@ object ApplicationStateTestFactory {
     fun createApplicationState(
         screenState: ScreenState = ScreenState.Onboarding(),
         backStack: CopyOnWriteStack<ScreenState> = CopyOnWriteStack(),
-        overlayState: OverlayState? = OverlayState.Dialog.EmptyDialog()
+        overlayState: OverlayState? = OverlayState.Dialog.EmptyDialog(),
     ) = ApplicationState(
-        navigationState = NavigationState<ScreenState, OverlayState>(
-            screen = screenState,
-            backStack = backStack,
-            overlay = overlayState
-        )
+        navigationState =
+            NavigationState<ScreenState, OverlayState>(
+                screen = screenState,
+                backStack = backStack,
+                overlay = overlayState,
+            ),
     )
 }

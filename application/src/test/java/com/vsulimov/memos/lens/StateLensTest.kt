@@ -16,7 +16,6 @@ import kotlin.test.assertEquals
  * the navigation state, screen state, overlay state, and back stack from [ApplicationState].
  */
 class StateLensTest {
-
     /**
      * Tests that [ApplicationState.toNavigationState] returns the navigationState from ApplicationState.
      */
@@ -33,9 +32,10 @@ class StateLensTest {
     @Test
     fun `toScreenState returns the screen from navigationState`() {
         val screenState: ScreenState = mock()
-        val navigationState: NavigationState<ScreenState, OverlayState> = mock {
-            on { screen }.thenReturn(screenState)
-        }
+        val navigationState: NavigationState<ScreenState, OverlayState> =
+            mock {
+                on { screen }.thenReturn(screenState)
+            }
         val applicationState = ApplicationState(navigationState)
         assertEquals(screenState, applicationState.toScreenState())
     }
@@ -46,9 +46,10 @@ class StateLensTest {
     @Test
     fun `toOverlayState returns the overlay from navigationState`() {
         val overlayState: OverlayState = mock()
-        val navigationState: NavigationState<ScreenState, OverlayState> = mock {
-            on { overlay }.thenReturn(overlayState)
-        }
+        val navigationState: NavigationState<ScreenState, OverlayState> =
+            mock {
+                on { overlay }.thenReturn(overlayState)
+            }
         val applicationState = ApplicationState(navigationState)
         assertEquals(overlayState, applicationState.toOverlayState())
     }
@@ -59,9 +60,10 @@ class StateLensTest {
     @Test
     fun `toNavigationBackStack returns the backStack from navigationState`() {
         val backStackState: CopyOnWriteStack<ScreenState> = mock()
-        val navigationState: NavigationState<ScreenState, OverlayState> = mock {
-            on { backStack }.thenReturn(backStackState)
-        }
+        val navigationState: NavigationState<ScreenState, OverlayState> =
+            mock {
+                on { backStack }.thenReturn(backStackState)
+            }
         val applicationState = ApplicationState(navigationState)
         assertEquals(backStackState, applicationState.toNavigationBackStack())
     }

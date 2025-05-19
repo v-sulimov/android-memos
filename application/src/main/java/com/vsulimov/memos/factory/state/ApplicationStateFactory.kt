@@ -11,7 +11,6 @@ import com.vsulimov.stack.CopyOnWriteStack
  * [ApplicationState] and [NavigationState].
  */
 object ApplicationStateFactory {
-
     /**
      * Creates the initial [ApplicationState] for the store.
      *
@@ -22,7 +21,7 @@ object ApplicationStateFactory {
      */
     fun createInitialApplicationState() =
         ApplicationState(
-            navigationState = createInitialNavigationState()
+            navigationState = createInitialNavigationState(),
         )
 
     /**
@@ -33,9 +32,10 @@ object ApplicationStateFactory {
      *
      * @return The initial [NavigationState] with [ScreenState] and [OverlayState].
      */
-    private fun createInitialNavigationState(): NavigationState<ScreenState, OverlayState> = NavigationState(
-        screen = ScreenState.Onboarding(),
-        backStack = CopyOnWriteStack<ScreenState>(),
-        overlay = null
-    )
+    private fun createInitialNavigationState(): NavigationState<ScreenState, OverlayState> =
+        NavigationState(
+            screen = ScreenState.Onboarding(),
+            backStack = CopyOnWriteStack<ScreenState>(),
+            overlay = null,
+        )
 }
